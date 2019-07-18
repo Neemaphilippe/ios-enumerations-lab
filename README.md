@@ -6,8 +6,37 @@ Fork and clone this repo. On your fork, answer and commit the follow questions. 
 ## Question 1
 
 a) Define an enumeration called `iOSDeviceType` with member values `iPhone`, `iPad`, `iWatch`. Create a variable called `myDevice` and assign it one member value.
+```
+enum iOSDeviceType {
+case iPhone
+case iPad
+case iWatch
+
+}
+var myDevice = iOSDeviceType.iPad
+```
 
 b) Adjust your code above so that `iPhone` and `iPad` have associated values of type String which represents the model number, eg: `iPhone("6 Plus")`. Use a switch case and let syntax to print out the model number of each device.
+```
+enum iOSDeviceType {
+    case iPhone (String)
+    case iPad (String)
+    case iWatch (String)
+    func printDescription() {
+        switch self {
+            case .iPhone(let modelType):
+            print("This is an iPhone \(modelType)")
+            case .iPad(let modelType):
+            print("This is an iPAd \(modelType)")
+        default:
+            print("This does nothing")
+        }
+    }
+}
+
+let myDevice = iOSDeviceType.iPhone("8+")
+myDevice.printDescription()
+```
 
 
 ## Question 2
@@ -45,7 +74,26 @@ enum Direction {
 var location = (x: 0, y: 0)
 var steps: [Direction] = [.up, .up, .left, .down, .left]
 
-// your code here
+// 
+var location = (x: 0, y: 0)
+var steps : [Direction] = [.up, .up, .left, .down, .left]
+
+
+for direction in steps {
+    print("The current location is at x: \(location.x) and y: \(location.y)")
+    print("I am about to go \(direction)")
+    switch direction {
+    case .up:
+        location.y += 1
+    case .down:
+        location.y -= 1
+    case .left:
+        location.x -= 1
+    case .right:
+        location.x += 1
+    }
+}
+print("The final location is: \(location)")
 ```
 
 
@@ -58,7 +106,40 @@ b) Define an enumeration named `MatchResult` with three members: `.win`, `.draw`
 c) Write a function called `match` that takes two `HandShapes` and returns a `MatchResult`. It should return the outcome for the first player (the one with the first hand shape).
 
 Hint: Rock beats scissors, paper beats rock, scissor beats paper
-
+```
+enum HandShape {
+    case rock
+    case paper
+    case scissors
+}
+enum MatchResult {
+    case win
+    case lose
+    case draw
+}
+func match(firstShape: HandShape, secondShape: HandShape) -> MatchResult {
+    switch firstShape {
+    case .rock:
+    switch secondShape {
+    case .rock: return .draw
+    case .paper: return .lose
+    case .scissors: return .win
+}
+    case .paper:
+        switch secondShape{
+        case .rock: return .win
+        case .paper: return.draw
+        case .scissors: return .lose
+}
+    case .scissors:
+        switch secondShape {
+        case .rock: return .lose
+        case .paper: return .win
+        case .scissors: return .draw
+        }
+    }
+}
+```
 
 ## Question 6
 
